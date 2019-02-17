@@ -1,0 +1,8 @@
+@using OrchardCore.ContentManagement
+
+@{
+    ContentItem contentItem = Model.ContentItem;
+    RenderTitleSegments(Html.Raw(contentItem.DisplayText));
+}
+
+@await DisplayAsync(Model.Content)

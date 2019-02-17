@@ -1,0 +1,19 @@
+/* ==========================================================================
+   #MEDIA
+   ========================================================================== */
+
+/**
+ * Displays a media element (image, video, etc...) with some accompanying
+ * content.
+ */
+
+.media {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+    .media__body {
+        flex: 1;
+        @include rem(margin-left, $spacing-default);
+    }

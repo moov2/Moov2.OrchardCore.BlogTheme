@@ -1,0 +1,15 @@
+/* ==========================================================================
+   #MAIN
+   ========================================================================== */
+
+/**
+ * Apply styles to `main` container around content.
+ */
+
+main {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    @include rem(width, $layout-content-width);
+}

@@ -11,14 +11,20 @@
         <resources type="Stylesheet" />
         <resources type="HeadScript" />
 
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Source+Sans+Pro" rel="stylesheet">
         <link rel="stylesheet" href="/Moov2.OrchardCore.BlogTheme/css/style.css">
-        <script src="/Moov2.OrchardCore.BlogTheme/js/bundle.js" async></script>
 
-        @await RenderSectionAsync("Header", required: false)
+        <script src="/Moov2.OrchardCore.BlogTheme/js/bundle.js" async></script>
     </head>
     <body>
-        @await RenderSectionAsync("Header", required: false)
-        @await RenderBodyAsync()
+        <header class="header">
+            @await RenderSectionAsync("Header", required: false)
+        </header>
+
+        <main>            
+            @await RenderBodyAsync()
+        </main>
+
         @await RenderSectionAsync("Footer", required: false)
 
         <resources type="FootScript" />

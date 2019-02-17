@@ -1,0 +1,17 @@
+/* ==========================================================================
+   #HEADER
+   ========================================================================== */
+
+/**
+ * Header containing a logo & navigation.
+ */
+
+.header {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    @include rem(padding-bottom, $spacing-large);
+    @include rem(padding-top, $spacing-large);
+    position: relative;
+    @include rem(width, $layout-header-width);
+}
