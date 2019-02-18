@@ -8,6 +8,7 @@
 
 main {
     display: block;
+    @include rem(margin-bottom, $spacing-x-large);
     margin-left: auto;
     margin-right: auto;
     position: relative;

@@ -1,16 +1,12 @@
 /* ==========================================================================
-   #COLOR
+   #BORDER
    ========================================================================== */
 
 /**
- * Colour palette used throughout.
+ * Settings for controlling borders.
  */
 
-$text-color-default: #54595f;
-$text-color-light: #aaa;
-
-$link-color-default: #449DD1;
-
 $border-color-default: #e5e5e5;
-
-$background-color-code: #f4f4f4;
+$border-radius-default: 5px;
+$border-style-default: solid;
+$border-thickness-default: 1px;

@@ -16,7 +16,7 @@
     position: relative;
     @include rem(width, $layout-content-width);
 
-    border-bottom: 1px solid $border-color-default;
+    border-bottom: $border-thickness-default $border-style-default $border-color-default;
 }
 
     .header__title {

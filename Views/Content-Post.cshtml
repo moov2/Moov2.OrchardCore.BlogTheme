@@ -1,0 +1,46 @@
+@using OrchardCore.ContentManagement
+
+@{
+    ContentItem contentItem = Model.ContentItem;
+    var publishedDate = (DateTime?)contentItem.PublishedUtc;
+
+    RenderTitleSegments(Html.Raw(contentItem.DisplayText));
+}
+
+@await DisplayAsync(Model.Header)
+
+@if (publishedDate.HasValue) {
+    <div class="margin--bottom-large">
+        <p class="text--meta">Published on @DisplayDate(publishedDate)</p>
+    </div>
+}
+
+@await DisplayAsync(Model.Content)
+
+<p class="padding--top-large"><a href="/" title="Return to homepage">Return to homepage</a></p>
+
+@functions {
+    string DisplayDate(DateTime? date)
+    {
+        return string.Format("{0}{1} {2}", date.Value.ToString("dd"), GetOrdinal(date), date.Value.ToString("MMMM yyyy"));
+    }
+
+    string GetOrdinal(DateTime? date)
+    {
+        switch (date.Value.Day)
+        {
+            case 1:
+            case 21:
+            case 31:
+                return "st";
+            case 2:
+            case 22:
+                return "nd";
+            case 3:
+            case 23:
+                return "rd";
+            default:
+                return "th";
+        }
+    }
+}

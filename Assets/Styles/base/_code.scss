@@ -1,15 +1,12 @@
 /* ==========================================================================
-   #PARAGRAPH
+   #CODE
    ========================================================================== */
 
 /**
- * Styling of paragraph element.
+ * Block of code.
  */
 
-p {
-    @include rem(margin-bottom, $spacing-default);
-    margin-top: 0;
-
-    @include rem(font-size, $font-size-default);
+code {
+    font-family: $font-family-code;
     @include rem(line-height, $line-height-default);
 }

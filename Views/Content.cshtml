@@ -2,7 +2,7 @@
 
 @{
     ContentItem contentItem = Model.ContentItem;
-    RenderTitleSegments(Html.Raw(contentItem.DisplayText));
 }
 
+@await DisplayAsync(Model.Header)
 @await DisplayAsync(Model.Content)

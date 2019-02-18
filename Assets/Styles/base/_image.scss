@@ -1,0 +1,17 @@
+/* ==========================================================================
+   #IMAGE
+   ========================================================================== */
+
+/**
+ * Styling for `img` element
+ */
+
+img {
+    display: block;
+    max-width: 100%;
+
+    main & {
+        @include rem(margin-bottom, $spacing-large);
+        @include rem(padding-top, $spacing-default);
+    }
+}

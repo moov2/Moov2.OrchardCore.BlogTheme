@@ -1,0 +1,20 @@
+/* ==========================================================================
+   #PRE
+   ========================================================================== */
+
+/**
+ * Wrapper around code block.
+ */
+
+pre {
+    display: block;
+    @include rem(margin-bottom, $spacing-large);
+    max-width: 100%;
+    @include rem(padding, $spacing-large);
+
+    background-color: $background-color-code;
+    border-radius: $border-radius-default;
+
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
