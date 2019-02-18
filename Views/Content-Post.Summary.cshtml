@@ -1,0 +1,40 @@
+@using OrchardCore.ContentManagement
+
+@{
+    ContentItem contentItem = Model.ContentItem;
+    var publishedDate = (DateTime?)contentItem.PublishedUtc;
+}
+
+@if (publishedDate.HasValue) {
+    <p class="text--meta">@DisplayDate(publishedDate)</p>
+}
+
+<h2>
+    <a display-for="@Model.ContentItem">@contentItem.DisplayText</a>
+</h2>
+
+@functions {
+    string DisplayDate(DateTime? date)
+    {
+        return string.Format("{0}{1} {2}", date.Value.ToString("dd"), GetOrdinal(date), date.Value.ToString("MMMM yyyy"));
+    }
+
+    string GetOrdinal(DateTime? date)
+    {
+        switch (date.Value.Day)
+        {
+            case 1:
+            case 21:
+            case 31:
+                return "st";
+            case 2:
+            case 22:
+                return "nd";
+            case 3:
+            case 23:
+                return "rd";
+            default:
+                return "th";
+        }
+    }
+}

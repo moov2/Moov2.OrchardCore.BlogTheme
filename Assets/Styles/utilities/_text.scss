@@ -1,0 +1,18 @@
+/* ==========================================================================
+   #TEXT
+   ========================================================================== */
+
+/**
+ * Variety of classes for customising the display of text.
+ */
+
+.text--light { color: $text-color-light; }
+
+.text--small { @include rem(font-size, $font-size-small); }
+
+.text--meta {
+    @include rem(margin-bottom, $spacing-small);
+    
+    color: $text-color-light;
+    @include rem(font-size, $font-size-small);
+}

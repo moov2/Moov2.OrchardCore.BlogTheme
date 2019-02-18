@@ -9,8 +9,24 @@
 h1,
 h2,
 h3 {
-    @include rem(margin-bottom, $spacing-default);
+    @include rem(margin-bottom, $spacing-large);
     margin-top: 0;
 
-    font-family: $font-family-heading;
+    font-family: $font-family-default;
+    font-weight: bold;
+}
+
+h1 {
+    @include rem(font-size, $font-size-primary);
+    @include rem(line-height, $line-height-primary);
+}
+
+h2 {
+    @include rem(font-size, $font-size-secondary);
+    @include rem(line-height, $line-height-secondary);
+}
+
+h3 {
+    @include rem(font-size, $font-size-tertiary);
+    @include rem(line-height, $line-height-tertiary);
 }

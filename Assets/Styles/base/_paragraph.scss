@@ -1,14 +1,12 @@
 /* ==========================================================================
-   #COLOR
+   #PARAGRAPH
    ========================================================================== */
 
 /**
- * Colour palette used throughout.
+ * Styling of paragraph element.
  */
 
-$text-color-default: #54595f;
-$text-color-light: #aaa;
-
-$link-color-default: #449DD1;
-
-$border-color-default: #e5e5e5;
+p {
+    @include rem(margin-bottom, $spacing-default);
+    margin-top: 0;
+}

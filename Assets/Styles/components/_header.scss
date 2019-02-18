@@ -8,10 +8,20 @@
 
 .header {
     display: block;
+    @include rem(margin-bottom, $spacing-large);
     margin-left: auto;
     margin-right: auto;
     @include rem(padding-bottom, $spacing-large);
     @include rem(padding-top, $spacing-large);
     position: relative;
-    @include rem(width, $layout-header-width);
+    @include rem(width, $layout-content-width);
+
+    border-bottom: 1px solid $border-color-default;
 }
+
+    .header__title {
+        @include rem(margin-bottom, $spacing-small);
+
+        @include rem(font-size, $font-size-secondary);
+        font-weight: bold;
+    }

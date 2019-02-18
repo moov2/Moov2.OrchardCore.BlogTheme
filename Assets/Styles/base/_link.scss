@@ -4,10 +4,17 @@
 
 a {
     color: $link-color-default;
-    
+
     &:active,
     &:hover {
         color: $link-color-default;
+        text-decoration: none;
+    }
+}
+
+h1, h2, h3 {
+    > a {
+        color: $text-color-default;
         text-decoration: none;
     }
 }
