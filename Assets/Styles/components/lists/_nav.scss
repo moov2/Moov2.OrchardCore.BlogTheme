@@ -8,5 +8,9 @@
 
     > .list__item {
         @include rem(margin-right, $spacing-default);
+
+        a {
+            display: block;
+        }
     }
 }

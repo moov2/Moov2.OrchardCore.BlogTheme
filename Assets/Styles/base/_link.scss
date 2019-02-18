@@ -9,6 +9,10 @@ a {
     &:hover {
         color: $link-color-default;
         text-decoration: none;
+
+        > svg {
+            fill: $link-color-default;
+        }
     }
 }
 

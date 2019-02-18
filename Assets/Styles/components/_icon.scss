@@ -1,0 +1,16 @@
+/* ==========================================================================
+   #ICON
+   ========================================================================== */
+
+/**
+ * Controls various icons displayed.
+ */
+
+.icon {
+    display: block;
+}
+
+.icon--social {
+    height: $icon-social-dimension;
+    width: $icon-social-dimension;
+}
