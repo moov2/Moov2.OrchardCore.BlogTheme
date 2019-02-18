@@ -12,9 +12,12 @@
     margin-left: auto;
     margin-right: auto;
     @include rem(padding-bottom, $spacing-large);
+    @include rem(padding-left, $spacing-default);
+    @include rem(padding-right, $spacing-default);
     @include rem(padding-top, $spacing-large);
     position: relative;
-    @include rem(width, $layout-content-width);
+    @include rem(max-width, $layout-content-width);
+    width: 100%;
 
     border-bottom: $border-thickness-default $border-style-default $border-color-default;
 }
