@@ -1,0 +1,793 @@
+{
+  "name": "Blog",
+  "displayName": "Blog",
+  "description": "Sets up content for blog website.",
+  "author": "Moov2 Ltd.",
+  "website": "https://moov2.com",
+  "version": "0.1.0",
+  "issetuprecipe": true,
+  "categories": ["default"],
+  "tags": ["games"],
+  "variables": {
+    "homepageContentItemId": "[js:uuid()]",
+    "now": "[js: new Date().toISOString()]"
+  },
+  "steps": [
+    {
+      "name": "Feature",
+      "enable": [
+        "PK.OrchardCore.Website",
+        "OrchardCore.Settings",
+        "OrchardCore.Admin",
+        "OrchardCore.AdminMenu",
+        "OrchardCore.Liquid",
+        "OrchardCore.Contents",
+        "OrchardCore.ContentTypes",
+        "OrchardCore.Alias",
+        "OrchardCore.Autoroute",
+        "OrchardCore.ContentFields",
+        "OrchardCore.ContentPreview",
+        "OrchardCore.Contents.FileContentDefinition",
+        "OrchardCore.CustomSettings",
+        "OrchardCore.Deployment",
+        "OrchardCore.Deployment.Remote",
+        "OrchardCore.Diagnostics",
+        "OrchardCore.DynamicCache",
+        "OrchardCore.Resources",
+        "OrchardCore.Features",
+        "OrchardCore.Feeds",
+        "OrchardCore.Widgets",
+        "OrchardCore.Flows",
+        "OrchardCore.HomeRoute",
+        "OrchardCore.Html",
+        "OrchardCore.Indexing",
+        "OrchardCore.Scripting",
+        "OrchardCore.Layers",
+        "OrchardCore.Lists",
+        "OrchardCore.Lucene",
+        "OrchardCore.Markdown",
+        "OrchardCore.Title",
+        "OrchardCore.Media",
+        "OrchardCore.Menu",
+        "OrchardCore.Navigation",
+        "OrchardCore.Queries",
+        "OrchardCore.Users",
+        "OrchardCore.Recipes",
+        "OrchardCore.Roles",
+        "OrchardCore.Taxonomies",
+        "OrchardCore.Templates",
+        "OrchardCore.Themes",
+        "Moov2.OrchardCore.BlogTheme",
+        "TheAdmin"
+      ],
+      "disable": [
+        "OrchardCore.Apis.GraphQL",
+        "OrchardCore.BackgroundTasks",
+        "OrchardCore.DataProtection.Azure",
+        "OrchardCore.Email",
+        "OrchardCore.Facebook",
+        "OrchardCore.Facebook.Login",
+        "OrchardCore.Forms",
+        "OrchardCore.Google.Analytics",
+        "OrchardCore.Google.GoogleAuthentication",
+        "OrchardCore.Https",
+        "OrchardCore.Localization",
+        "OrchardCore.Lucene.ContentPicker",
+        "OrchardCore.Lucene.Worker",
+        "OrchardCore.Media.Azure.Storage",
+        "OrchardCore.Microsoft.Authentication.AzureAD",
+        "OrchardCore.Microsoft.Authentication.MicrosoftAccount",
+        "OrchardCore.MiniProfiler",
+        "OrchardCore.OpenId",
+        "OrchardCore.OpenId.Client",
+        "OrchardCore.OpenId.Management",
+        "OrchardCore.OpenId.EntityFrameworkCore",
+        "OrchardCore.OpenId.Server",
+        "OrchardCore.OpenId.Validation",
+        "OrchardCore.Queries.Sql",
+        "OrchardCore.ReCaptcha",
+        "OrchardCore.ReCaptcha.Users",
+        "OrchardCore.XmlRpc",
+        "OrchardCore.RemotePublishing",
+        "OrchardCore.ResponseCache",
+        "OrchardCore.ResponseCompression",
+        "OrchardCore.ReverseProxy",
+        "OrchardCore.Setup",
+        "OrchardCore.Tenants",
+        "OrchardCore.Tenants.FileProvider",
+        "OrchardCore.Twitter.TwitterSignin",
+        "OrchardCore.Users.Registration",
+        "OrchardCore.Users.ResetPassword",
+        "OrchardCore.Users.TimeZone",
+        "OrchardCore.Workflows",
+        "OrchardCore.Workflows.Http",
+        "OrchardCore.Workflows.Timers",
+        "SafeMode",
+        "TheAgencyTheme",
+        "TheBlogTheme",
+        "TheComingSoonTheme",
+        "TheTheme"
+      ]
+    },
+    {
+      "name": "Layers",
+      "Layers": [
+        {
+          "Name": "Default",
+          "Rule": "true",
+          "Description": "Displays widgets on every page."
+        }
+      ]
+    },
+    {
+      "name": "Settings",
+      "LayerSettings": {
+        "Zones": ["Header", "Footer"]
+      }
+    },
+    {
+      "name": "ContentDefinition",
+      "ContentTypes": [
+        {
+          "Name": "Menu",
+          "DisplayName": "Menu",
+          "Settings": {
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True"
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "Position": "1",
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem | display_text | slugify }}"
+                }
+              }
+            },
+            {
+              "PartName": "MenuPart",
+              "Name": "MenuPart",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "MenuItemsListPart",
+              "Name": "MenuItemsListPart",
+              "Settings": {
+                "Position": "3"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "LinkMenuItem",
+          "DisplayName": "Link Menu Item",
+          "Settings": {
+            "Stereotype": "MenuItem"
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "LinkMenuItemPart",
+              "Name": "LinkMenuItemPart",
+              "Settings": {
+                "Position": "0"
+              }
+            },
+            {
+              "PartName": "LinkMenuItem",
+              "Name": "LinkMenuItem",
+              "Settings": {
+                "Position": "1"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Taxonomy",
+          "DisplayName": "Taxonomy",
+          "Settings": {
+            "Draftable": "True",
+            "Versionable": "True",
+            "Creatable": "False",
+            "Listable": "True",
+            "Securable": "False",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0"
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "Position": "1",
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem | display_text | slugify }}"
+                }
+              }
+            },
+            {
+              "PartName": "TaxonomyPart",
+              "Name": "TaxonomyPart",
+              "Settings": {
+                "Position": "2"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Post",
+          "DisplayName": "Post",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Post",
+              "Name": "Post",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "Position": "1",
+                "DisplayName": null,
+                "Description": null,
+                "Editor": null,
+                "Pattern": "{{ ContentItem | display_text | slugify }}",
+                "AllowCustomPath": "True",
+                "AllowUpdatePath": "False",
+                "ShowHomepageOption": "False",
+                "ContentIndexSettings": {}
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0"
+              }
+            },
+            {
+              "PartName": "CommonPart",
+              "Name": "CommonPart",
+              "Settings": {
+                "Position": "4",
+                "DisplayName": null,
+                "Description": null,
+                "Editor": null,
+                "CommonPartSettings": {
+                  "DisplayDateEditor": true
+                },
+                "ContentIndexSettings": {}
+              }
+            },
+            {
+              "PartName": "HtmlBodyPart",
+              "Name": "HtmlBodyPart",
+              "Settings": {
+                "Position": "3",
+                "DisplayName": null,
+                "Description": null,
+                "Editor": "Wysiwyg",
+                "HtmlBodyPartSettings": {},
+                "ContentIndexSettings": {}
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Blog",
+          "DisplayName": "Blog",
+          "Settings": {
+            "Creatable": "True",
+            "Draftable": "True",
+            "Versionable": "True",
+            "Listable": "True",
+            "Securable": "True",
+            "Stereotype": null
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Blog",
+              "Name": "Blog",
+              "Settings": {
+                "Position": "2"
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "Position": "1",
+                "DisplayName": null,
+                "Description": null,
+                "Editor": null,
+                "Pattern": "{{ ContentItem | display_text | slugify }}",
+                "AllowCustomPath": "True",
+                "AllowUpdatePath": "False",
+                "ShowHomepageOption": "True",
+                "ContentIndexSettings": {}
+              }
+            },
+            {
+              "PartName": "ListPart",
+              "Name": "ListPart",
+              "Settings": {
+                "Position": "3",
+                "DisplayName": null,
+                "Description": null,
+                "Editor": null,
+                "PageSize": "10",
+                "ContainedContentTypes": ["Post"],
+                "ContentIndexSettings": {}
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Html",
+          "DisplayName": "Html",
+          "Settings": {
+            "Creatable": "False",
+            "Draftable": "False",
+            "Versionable": "False",
+            "Listable": "False",
+            "Securable": "False",
+            "Stereotype": "Widget"
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Html",
+              "Name": "Html",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        }
+      ],
+      "ContentParts": [
+        {
+          "Name": "CommonPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides an editor for the common properties of a content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "LiquidPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a Liquid formatted body for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "AliasPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a way to define custom aliases for content items."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "AutoroutePart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a custom url for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "WidgetsListPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a way to add widgets per content items."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "FlowPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a customizable body for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "BagPart",
+          "Settings": {
+            "Attachable": "True",
+            "Reusable": "True",
+            "Description": "Provides a collection behavior for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "HtmlBodyPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides an HTML Body for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "ListPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Add a list behavior."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "MarkdownBodyPart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a Markdown formatted body for your content item."
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "TitlePart",
+          "Settings": {
+            "Attachable": "True",
+            "Description": "Provides a Title for your content item.",
+            "DefaultPosition": "0"
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "Post",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "TaxonomyField",
+              "Name": "Tags",
+              "Settings": {
+                "DisplayName": "Tags",
+                "Editor": null,
+                "DisplayMode": null,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                },
+                "Hint": null,
+                "Required": false,
+                "TaxonomyContentItemId": "43j26m51k07qr1a4wgjev9es52",
+                "Unique": false,
+                "LeavesOnly": false,
+                "Open": false,
+                "Position": "0"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Html",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "HtmlField",
+              "Name": "Html",
+              "Settings": {
+                "DisplayName": "Html",
+                "Editor": "Multiline",
+                "DisplayMode": null,
+                "Hint": null,
+                "ContentIndexSettings": {
+                  "Included": false,
+                  "Stored": false,
+                  "Analyzed": false,
+                  "Sanitized": false,
+                  "Tokenized": false,
+                  "Template": null
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Themes",
+      "Site": "Moov2.OrchardCore.BlogTheme",
+      "Admin": "TheAdmin"
+    },
+    {
+      "name": "Content",
+      "data": [
+        {
+          "ContentItemId": "43j26m51k07qr1a4wgjev9es52",
+          "ContentItemVersionId": "4tpq99ytaacf03mdnf5475eyxd",
+          "ContentType": "Taxonomy",
+          "DisplayText": "Tags",
+          "Latest": true,
+          "Published": true,
+          "ModifiedUtc": "[js: variables('now')]",
+          "PublishedUtc": "[js: variables('now')]",
+          "CreatedUtc": "[js: variables('now')]",
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "TitlePart": {
+            "Title": "Tags"
+          },
+          "AliasPart": {
+            "Alias": "tags"
+          },
+          "TaxonomyPart": {
+            "Terms": [
+              {
+                "ContentItemId": "4g1es2wbp5fm9wdfd6q74vv0wr",
+                "ContentItemVersionId": null,
+                "ContentType": "Taxonomy",
+                "DisplayText": "Example Tag #1",
+                "Latest": false,
+                "Published": false,
+                "ModifiedUtc": "[js: variables('now')]",
+                "PublishedUtc": null,
+                "CreatedUtc": null,
+                "Owner": null,
+                "Author": "[js: parameters('AdminUsername')]",
+                "TitlePart": {
+                  "Title": "Example Tag #1"
+                },
+                "AliasPart": {
+                  "Alias": "example-tag-1"
+                },
+                "TaxonomyPart": {
+                  "Terms": [],
+                  "TermContentType": "Taxonomy"
+                }
+              },
+              {
+                "ContentItemId": "4jxnw7y3nvh42rr1tw47bv8dwb",
+                "ContentItemVersionId": null,
+                "ContentType": "Taxonomy",
+                "DisplayText": "Example Tag #2",
+                "Latest": false,
+                "Published": false,
+                "ModifiedUtc": "[js: variables('now')]",
+                "PublishedUtc": null,
+                "CreatedUtc": null,
+                "Owner": null,
+                "Author": "[js: parameters('AdminUsername')]",
+                "TitlePart": {
+                  "Title": "Example Tag #2"
+                },
+                "AliasPart": {
+                  "Alias": "example-tag-2"
+                },
+                "TaxonomyPart": {
+                  "Terms": [],
+                  "TermContentType": "Taxonomy"
+                }
+              }
+            ],
+            "TermContentType": "Taxonomy"
+          }
+        },
+        {
+          "ContentItemId": "4r1kheq71hhkx0ndph7dt7tfcp",
+          "ContentItemVersionId": "43j8k2tryj77wsr180m8xy04m7",
+          "ContentType": "Html",
+          "DisplayText": "Site Title",
+          "Latest": true,
+          "Published": true,
+          "ModifiedUtc": "[js: variables('now')]",
+          "PublishedUtc": "[js: variables('now')]",
+          "CreatedUtc": "[js: variables('now')]",
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Html": {
+            "Html": {
+              "Html": "<div class=\"media\">\r\n    <img src=\"/Media/Site/logo.jpeg\" alt=\"Picture of Peter Keating\" class=\"image--logo\" />\r\n\r\n    <div class=\"media__body\">\r\n        <h1>Peter Keating</h1>\r\n    </div>\r\n</div>"
+            }
+          },
+          "LayerMetadata": {
+            "Position": 1.0,
+            "Zone": "Title",
+            "Layer": "Default",
+            "RenderTitle": false
+          }
+        },
+        {
+          "ContentItemId": "49jeb1y82rk0frkwhw1ttbbkn4",
+          "ContentItemVersionId": "4ch2xv5zw5a4s2y0twzkmj1rdz",
+          "ContentType": "Blog",
+          "DisplayText": "Blog",
+          "Latest": true,
+          "Published": true,
+          "ModifiedUtc": "[js: variables('now')]",
+          "PublishedUtc": "[js: variables('now')]",
+          "CreatedUtc": "[js: variables('now')]",
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Blog": {},
+          "AutoroutePart": {
+            "Path": "primary-blog",
+            "SetHomepage": true
+          },
+          "ListPart": {
+            "FeedProxyUrl": null,
+            "FeedItemsCount": 20
+          },
+          "TitlePart": {
+            "Title": "Blog"
+          }
+        },
+        {
+          "ContentItemId": "491c5hpqheksgx511rz21zfxwv",
+          "ContentItemVersionId": "4qk69s1zgdrhr60qj84eyr6bnn",
+          "ContentType": "Html",
+          "DisplayText": "Site Header",
+          "Latest": true,
+          "Published": true,
+          "ModifiedUtc": "[js: variables('now')]",
+          "PublishedUtc": "[js: variables('now')]",
+          "CreatedUtc": "[js: variables('now')]",
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Html": {
+            "Html": {
+              "Html": "<div class=\"media media--spaced\">\r\n    <a href=\"/\"><img src=\"/Media/Site/logo.svg\" alt=\"Logo for blog\" class=\"image--logo\" /></a>\r\n    <div class=\"media__body\">\r\n        <div class=\"header__title\">Example Blog</div>\r\n\r\n        <ul class=\"list list--nav\">\r\n            <li class=\"list__item\">\r\n                <a href=\"https://github.com/orchardcms/OrchardCore\">\r\n                    <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" class=\"icon icon--social\"><path fill=\"none\" d=\"M0 0h24v24H0z\"/><path d=\"M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.84 9.49.5.09.68-.22.68-.485 0-.236-.008-.866-.013-1.7-2.782.603-3.37-1.34-3.37-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.07-.607.07-.607 1.004.07 1.532 1.03 1.532 1.03.89 1.53 2.34 1.09 2.91.833.09-.647.348-1.086.634-1.337-2.22-.252-4.555-1.112-4.555-4.944 0-1.09.39-1.984 1.03-2.682-.104-.254-.448-1.27.096-2.646 0 0 .84-.27 2.75 1.025a9.553 9.553 0 0 1 2.504-.337c.85.004 1.705.114 2.504.336 1.91-1.294 2.748-1.025 2.748-1.025.546 1.376.202 2.394.1 2.646.64.7 1.026 1.59 1.026 2.682 0 3.84-2.337 4.687-4.565 4.935.36.307.68.917.68 1.852 0 1.335-.013 2.415-.013 2.74 0 .27.18.58.688.482C19.138 20.16 22 16.416 22 12c0-5.523-4.477-10-10-10z\"/></svg></a>\r\n            </li>\r\n            <li class=\"list__item\">\r\n                <a href=\"https://twitter.com/orchardcms\">\r\n                    <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" class=\"icon icon--social\"><path fill=\"none\" d=\"M0 0h24v24H0z\"/><path d=\"M22.23 5.924a8.212 8.212 0 0 1-2.357.646 4.115 4.115 0 0 0 1.804-2.27c-.793.47-1.67.812-2.606.996a4.103 4.103 0 0 0-6.99 3.742 11.643 11.643 0 0 1-8.457-4.287 4.093 4.093 0 0 0-.556 2.064c0 1.424.724 2.68 1.825 3.415a4.111 4.111 0 0 1-1.86-.514v.052a4.105 4.105 0 0 0 3.293 4.023 4.056 4.056 0 0 1-1.853.071 4.108 4.108 0 0 0 3.833 2.85 8.237 8.237 0 0 1-5.096 1.757c-.332 0-.66-.02-.98-.057a11.617 11.617 0 0 0 6.29 1.843c7.547 0 11.675-6.252 11.675-11.675 0-.178-.004-.355-.012-.53a8.302 8.302 0 0 0 2.047-2.124z\"/></svg>\r\n                </a>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n</div>"
+            }
+          },
+          "LayerMetadata": {
+            "Position": 1.0,
+            "Zone": "Header",
+            "Layer": "Default",
+            "RenderTitle": false
+          }
+        },
+        {
+          "ContentItemId": "4vkp97dawyr7ryandb3n3hps5z",
+          "ContentItemVersionId": "486190sam3t9pyy6jjzm3v1zn5",
+          "ContentType": "Post",
+          "DisplayText": "Rocket Jump and Ukie Christmas drinks",
+          "Latest": true,
+          "Published": true,
+          "ModifiedUtc": "[js: variables('now')]",
+          "PublishedUtc": "[js: variables('now')]",
+          "CreatedUtc": "2018-11-20T21:29:24.68Z",
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Post": {
+            "Tags": {
+              "TaxonomyContentItemId": "43j26m51k07qr1a4wgjev9es52",
+              "TermContentItemIds": []
+            }
+          },
+          "AutoroutePart": {
+            "Path": "rocket-jump-ukie-christmas-drinks",
+            "SetHomepage": false
+          },
+          "TitlePart": {
+            "Title": "Rocket Jump and Ukie Christmas drinks"
+          },
+          "CommonPart": {},
+          "HtmlBodyPart": {
+            "Html": "<p>In addition to our fantastic speaker line up and the chance to hang out with other enthusiastic community management folks, we're excited to announce that following the Community Managers' Summit, we will be joining our friends at Ukie for the Ukie Christmas Drinks.</p>\r\n<p>Moov2 and Jagex are sponsoring the drinks and all attendees of the Community Managers' Summit are invited to join us for some early season festivities. So make sure you stick around after Rocket Jump and enjoy a drink (or two...) on us!</p>\r\n<p>The Christmas drinks event will run from 5pm - 8pm and is at the same venue as our main event. No further travelling required! And if you have a Rocket Jump ticket then you're already invited.</p>\r\n<p>If you don't have your Rocket Jump ticket yet, grab one now! Use the button below for a free ticket.</p>\r\n<p><a href=\"https://rocket-jump-events.eventbrite.co.uk?discount=moov2friend\" target=\"_blank\" title=\"Click here for free tickets\">Click here for free tickets</a></p>"
+          },
+          "ContainedPart": {
+            "ListContentItemId": "49jeb1y82rk0frkwhw1ttbbkn4",
+            "Order": 0
+          }
+        },
+        {
+          "ContentItemId": "4sycww01wy5ycsw9qmves989dj",
+          "ContentItemVersionId": "4j19n5xz4srrqzvmvd5yeqhem5",
+          "ContentType": "Post",
+          "DisplayText": "Moov2 is now ETCH Play",
+          "Latest": true,
+          "Published": true,
+          "ModifiedUtc": "[js: variables('now')]",
+          "PublishedUtc": "[js: variables('now')]",
+          "CreatedUtc": "2019-01-31T21:26:16.933Z",
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Post": {
+            "Tags": {
+              "TaxonomyContentItemId": "43j26m51k07qr1a4wgjev9es52",
+              "TermContentItemIds": []
+            }
+          },
+          "AutoroutePart": {
+            "Path": "moov2-is-now-etch-play",
+            "SetHomepage": false
+          },
+          "TitlePart": {
+            "Title": "Moov2 is now ETCH Play"
+          },
+          "CommonPart": {},
+          "HtmlBodyPart": {
+            "Html": "<p>Several years ago, Moov2 took the decision to dedicate our many years of expertise in digital products and services to the games industry. The rationale for this was driven by a desire to apply our skills to a high-interest industry we are passionate about and focus our experience to maximise the value we can add to our clients.</p>\r\n\r\n<p>Since this focus, we have had the privilege to work with some incredible clients such as Microsoft, Sony, Hello Games, Supermassive Games and many others. We have organised and hosted a series of industry focused micro-conferences, <a href=\"https://rocketjumpevents.com/\" target=\"_blank\">Rocket Jump Events</a>, launched community learning resource <a href=\"https://gameuipatterns.com/\" target=\"_blank\">GameUIPatterns.com</a> and experimented with side-projects such as <a href=\"http://lol-compare.com/\" target=\"_blank\">lol-compare.com</a>, a League of Legends mobile companion experience.</p>\r\n\r\n<p>At the end of 2018, Moov2 were acquired by ETCH, a leading digital consultancy with offices in London, Southampton and South Africa (<a href=\"https://www.etchuk.com/insights/etchgroup-acquire-moov2\" target=\"_blank\">read the announcement here</a>). With this exciting change, our mission to be the best digital products and services partner to the games industry remains the same. Only now, we are super-charged with more resources, a broader skill set and enhanced leadership support.</p>\r\n\r\n<p class=\"padding-bottom--large padding-top--large\">\r\n<img src=\"https://blog.etchplay.com/hs-fs/hubfs/etch-play-announcement-800x300.png?width=800&amp;name=etch-play-announcement-800x300.png\" alt=\"Moov2 logo next to the ETCH Play logo\" width=\"800\" style=\"width: 800px;\" srcset=\"https://blog.etchplay.com/hs-fs/hubfs/etch-play-announcement-800x300.png?width=400&amp;name=etch-play-announcement-800x300.png 400w, https://blog.etchplay.com/hs-fs/hubfs/etch-play-announcement-800x300.png?width=800&amp;name=etch-play-announcement-800x300.png 800w, https://blog.etchplay.com/hs-fs/hubfs/etch-play-announcement-800x300.png?width=1200&amp;name=etch-play-announcement-800x300.png 1200w, https://blog.etchplay.com/hs-fs/hubfs/etch-play-announcement-800x300.png?width=1600&amp;name=etch-play-announcement-800x300.png 1600w, https://blog.etchplay.com/hs-fs/hubfs/etch-play-announcement-800x300.png?width=2000&amp;name=etch-play-announcement-800x300.png 2000w, https://blog.etchplay.com/hs-fs/hubfs/etch-play-announcement-800x300.png?width=2400&amp;name=etch-play-announcement-800x300.png 2400w\" sizes=\"(max-width: 800px) 100vw, 800px\"></p>\r\n<p>To reflect this new step in our journey, Moov2 is re-branding to ETCH Play, a new sub-brand to reflect our place within the ETCH family and our continued commitment to the industry we know and love. We have lots of new announcements to follow in the coming weeks, so stay tuned to our updated social accounts on <a href=\"https://twitter.com/etchplay\">Twitter</a>, <a href=\"https://www.facebook.com/etchplay/\">Facebook</a>,&nbsp;<a href=\"https://www.instagram.com/etchplay/\">Instagram</a> and <a href=\"https://www.youtube.com/channel/UCo2Pd_rejaIqUtI996nl1uA\">YouTube</a> or feel free to get in touch below if you'd like to find out more.\r\n</p>"
+          },
+          "ContainedPart": {
+            "ListContentItemId": "49jeb1y82rk0frkwhw1ttbbkn4",
+            "Order": 0
+          }
+        },
+        {
+          "ContentItemId": "4fkznxnzmkzz3t0mdgbzx6zvme",
+          "ContentItemVersionId": "4vbfrmxyh22aar2sjy4vvt355x",
+          "ContentType": "Post",
+          "DisplayText": "Apex Legends vs Anthem launch marketing comparison",
+          "Latest": true,
+          "Published": true,
+          "ModifiedUtc": "[js: variables('now')]",
+          "PublishedUtc": "[js: variables('now')]",
+          "CreatedUtc": "2019-02-22T21:22:52.388Z",
+          "Owner": "[js: parameters('AdminUsername')]",
+          "Author": "[js: parameters('AdminUsername')]",
+          "Post": {
+            "Tags": {
+              "TaxonomyContentItemId": "43j26m51k07qr1a4wgjev9es52",
+              "TermContentItemIds": []
+            }
+          },
+          "AutoroutePart": {
+            "Path": "a-comparison-of-apex-legends-and-anthem-launch-marketing",
+            "SetHomepage": false
+          },
+          "TitlePart": {
+            "Title": "Apex Legends vs Anthem launch marketing comparison"
+          },
+          "CommonPart": {},
+          "HtmlBodyPart": {
+            "Html": "<p>I have been obsessively watching the launch proceedings for both of these titles which offers some fascinating aspects to compare, contrast and speculate on. To be clear, neither myself or Etch Play have any involvement with either of these titles, this post is simply spectator/enthusiast speculation based on no insider knowledge whatsoever (that said, if anyone from Respawn, Bioware or EA would like to chat, hi there! 👋 Find me on <a href=\"https://twitter.com/dannyt\" rel=\"nofollow\">Twitter</a> or <a href=\"https://www.linkedin.com/in/danmoov2/\">LinkedIn</a>).</p>\r\n\r\n<h2>Similarities</h2>\r\n\r\n<p>Whilst very different games overall, there are some similarities between these titles that makes for a worthwhile comparison:</p>\r\n<ul>\r\n    <li>Both titles are from EA-owned studios.</li>\r\n    <li>Both games are set in a futuristic, science fiction universe.</li>\r\n    <li>Both lean heavily into multiplayer functionality.</li>\r\n    <li>Both games are from North American studios with a strong pedigree.</li>\r\n    <li>Both studios have an existing large and passionate community following.</li>\r\n    <li>Both titles have been released within 3 weeks of each other.</li>\r\n</ul>\r\n\r\n<h2>Differences</h2>\r\n\r\n<p>Despite the vague similarities, what makes things really interesting is how the titles and in particular their launch campaigns have differed.</p>\r\n\r\n<ul>\r\n    <li>Apex is purely Battle Royale (Fortnite/PUBG competitor), Anthem is a collaborative PVE (player vs environment) experience with more of a narrative focus.</li>\r\n    <li>Anthem was announced in June 2017 at E3, <strong><em>20 months</em></strong> before release. Apex Legends was announced and released <strong><em>on the same day</em></strong>.</li>\r\n</ul>\r\n\r\n<p>\r\n    <em><img src=\"https://blog.etchplay.com/hs-fs/hubfs/anthem-v-apex-searches.png?width=1457&amp;name=anthem-v-apex-searches.png\" alt=\"anthem-v-apex-searches\" width=\"1457\" style=\"width: 1457px;\" srcset=\"https://blog.etchplay.com/hs-fs/hubfs/anthem-v-apex-searches.png?width=729&amp;name=anthem-v-apex-searches.png 729w, https://blog.etchplay.com/hs-fs/hubfs/anthem-v-apex-searches.png?width=1457&amp;name=anthem-v-apex-searches.png 1457w, https://blog.etchplay.com/hs-fs/hubfs/anthem-v-apex-searches.png?width=2186&amp;name=anthem-v-apex-searches.png 2186w, https://blog.etchplay.com/hs-fs/hubfs/anthem-v-apex-searches.png?width=2914&amp;name=anthem-v-apex-searches.png 2914w, https://blog.etchplay.com/hs-fs/hubfs/anthem-v-apex-searches.png?width=3643&amp;name=anthem-v-apex-searches.png 3643w, https://blog.etchplay.com/hs-fs/hubfs/anthem-v-apex-searches.png?width=4371&amp;name=anthem-v-apex-searches.png 4371w\" sizes=\"(max-width: 1457px) 100vw, 1457px\"><br>Web search comparison since June 2017 of ”Anthem“ (blue) and ”Apex Legends“ (red)&nbsp; </em>\r\n</p>\r\n\r\n<ul>\r\n    <li>Anthem is a premium product (£54.99 launch RRP). Apex is free to play with in-game microtransactions (items/currency that can optionally be bought for real money in game).</li>\r\n    <li>Anthem ran a beta with a suite of purchase levels that offered various rewards, Apex launched as a single SKU (per platform).<br>\r\n    <twitter-widget class=\"twitter-tweet twitter-tweet-rendered\" id=\"twitter-widget-0\" style=\"position: static; visibility: visible; display: block; transform: rotate(0deg); max-width: 100%; width: 500px; min-width: 220px; margin-top: 10px; margin-bottom: 10px;\" data-tweet-id=\"1043200715185840128\"></twitter-widget>\r\n    </li>\r\n    <li>Apex launched with no notice other than a few hours teaser live-stream leading to the announce. This was immediately followed by a raft of high-visibility streamers simultaneously playing the game on launch. Anthem has had a multi-year, transmedia and traditional marketing campaign.</li>\r\n    <li>Apex launched and hit 25 million players in one week (which was justifiably shared wide and loud by Respawn).\r\n        <div style=\"text-align: center;\">\r\n            <twitter-widget class=\"twitter-tweet twitter-tweet-rendered\" id=\"twitter-widget-1\" style=\"position: static; visibility: visible; display: block; transform: rotate(0deg); max-width: 100%; width: 500px; min-width: 220px; margin-top: 10px; margin-bottom: 10px;\" data-tweet-id=\"1095083729507110914\"></twitter-widget>\r\n        </div>\r\n    </li>\r\n    <li>Anthem launches today and we'll have to wait and see what sales/player numbers&nbsp;get shared.</li>\r\n</ul>\r\n\r\n<h2>My Thoughts</h2>\r\n\r\n<p>Both Apex Legends and Anthem launches are super-interesting to follow. It's great to see what's doable with big-publisher budgets in the marketing arena and initiatives like Anthem's live action short by Neil Blomkamp, EA and Bioware have not disappointed.</p>\r\n<p style=\"text-align: center;\">\r\n    <iframe allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" xml=\"lang\" src=\"//www.youtube.com/embed/wka5RovFEo8\" width=\"560\" height=\"315\" frameborder=\"0\" allowfullscreen=\"\"></iframe>\r\n</p>\r\n\r\n<p>With Apex Legends, it's fascinating to see a AAA studio, backed by a corporate behemoth doing something so outrageous. Equally, it's satisfying to seemingly see it pay dividend for Respawn. Anthem ticks a lot of the \"best practice\" boxes but recent years have certainly challenged \"best practice\" at all corners of the industry, from AAA to indie so it's exciting to see a change of tack.</p>\r\n\r\n<p>To say Apex launched with “no marketing” would be disingenuous. Clearly it was a very considered and intentional approach. But it is fair to say the overall launch campaign was much leaner and far more focused, seemingly (and from a totally ignorant perspective) executing with much less of an overhead in terms of human resource and marketing spend. My impression is that Apex has benefited greatly from this strategy and it's hard to suggest how it could have launched much more effectively.</p>\r\n\r\n<h3>Lessons learned</h3>\r\n\r\n<p>Respawn's previous release, Titanfall 2, had a similar scheduling conflict. Titanfall 2 was released in October 2016, one week after EA poster child, Battlefield 1 by DICE (another EA-owned studio). The week after, competing publisher Activision’s then-latest title, Call of Duty: Infinite Warfare was also released. Whilst Titanfall 2 launched with very positive reviews, attention was certainly eclipsed by the Battlefield 1 and Call of Duty fanfare.</p>\r\n\r\n<p>Apex Legends launching with next to no marketing build-up was certainly a risky move as it’s a fairly unprecedented strategy. After following the more traditional launch route with Titanfall 2, I wouldn't be surprised if Respawn felt they had nothing to lose, so a fresh approach seemed appealing. Respawn themselves have also acknowledged other benefits to the tactic related to the make-up and monetisation strategy of the game they’ve developed: <br> <br>\"We're doing a free to play game, with essentially loot boxes, after we were bought by EA, and it's not Titanfall 3. It's the perfect recipe for a marketing plan to go awry, so why have that - let's just ship the game and let players play.\" - <a href=\"https://www.eurogamer.net/articles/2019-02-04-respawn-explains-apex-legends-surprise-release-and-why-there-are-no-titans\" target=\"_blank\">Drew McCoy (Lead Producer, Respawn)</a></p>\r\n\r\n<h3>The end of&nbsp;launch campaigns?</h3>\r\n\r\n<p>I don’t think it’s realistic to say the success of Apex Legends spells the end of traditional marketing campaigns for video game launches. It does hopefully however, set a precedent that there is still much room for experimentation and doing things differently. I love how successful Apex has been and I’ve no doubt Anthem will also attract a huge player base. Only a few privileged folk at EA will have the luxury of comparing the return on marketing investment for each, but I hope we see more experimentation and bold moves like this for future releases.</p>\r\n\r\n<h2>What do you think?</h2>\r\n\r\n<p>Message&nbsp;us using the form below or reach out on <a href=\"https://twitter.com/etchplay\" rel=\"nofollow\">Twitter</a>&nbsp;with your thoughts, we'd love to hear from you.</p>"
+          },
+          "ContainedPart": {
+            "ListContentItemId": "49jeb1y82rk0frkwhw1ttbbkn4",
+            "Order": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "media",
+      "Files": [
+        {
+          "SourcePath": "media/logo.svg",
+          "TargetPath": "Site/logo.svg"
+        }
+      ]
+    }
+  ]
+}
