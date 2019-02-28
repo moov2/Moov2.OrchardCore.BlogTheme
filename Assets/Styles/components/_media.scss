@@ -16,4 +16,8 @@
     .media__body {
         flex: 1;
         @include rem(margin-left, $spacing-default);
+
+        .media--spaced & {
+            @include rem(margin-left, $spacing-large);
+        }
     }

@@ -4,8 +4,6 @@
 
 .image--logo {
     display: block;
-    @include rem(height, $image-dimension-small);
-    @include rem(max-width, $image-dimension-small);
-
-    border-radius: 50%;
+    @include rem(height, $image-logo-height);
+    @include rem(max-width, $image-logo-width);
 }
