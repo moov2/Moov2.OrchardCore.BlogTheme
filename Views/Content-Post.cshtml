@@ -2,7 +2,7 @@
 
 @{
     ContentItem contentItem = Model.ContentItem;
-    var publishedDate = (DateTime?)contentItem.PublishedUtc;
+    var publishedDate = (DateTime?)contentItem.CreatedUtc;
 
     RenderTitleSegments(Html.Raw(contentItem.DisplayText));
 }
