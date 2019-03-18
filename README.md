@@ -15,7 +15,7 @@ This theme is available as a pre-release on [NuGet](https://www.nuget.org/packag
 ### Package Manager Console
 
 ```
-PM> Install-Package Moov2.OrchardCore.BlogTheme
+PM> Install-Package Moov2.OrchardCore.BlogTheme -IncludePrerelease
 ```
 
 ### .NET CLI Console
