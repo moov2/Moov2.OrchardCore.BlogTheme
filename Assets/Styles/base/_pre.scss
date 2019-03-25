@@ -12,8 +12,10 @@ pre {
     max-width: 100%;
     @include rem(padding, $spacing-large);
 
-    background-color: $background-color-code;
-    border-radius: $border-radius-default;
+    @include themify($themes) {
+        background-color: themed('background.code');
+        border-radius: themed('border.radius');
+    }
 
     white-space: pre-wrap;
     word-wrap: break-word;

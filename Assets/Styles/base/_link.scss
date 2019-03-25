@@ -3,22 +3,32 @@
    ========================================================================== */
 
 a {
-    color: $link-color-default;
+    @include themify($themes) {
+        color: themed('color.link.default');
+    }
 
     &:active,
     &:hover {
-        color: $link-color-default;
+        @include themify($themes) {
+            color: themed('color.link.default');
+        }
+
         text-decoration: none;
 
         > svg {
-            fill: $link-color-default;
+            @include themify($themes) {
+                fill: themed('color.link.default');
+            }
         }
     }
 }
 
 h1, h2, h3 {
     > a {
-        color: $text-color-default;
+        @include themify($themes) {
+            color: themed('color.link.default');
+        }
+        
         text-decoration: none;
     }
 }
