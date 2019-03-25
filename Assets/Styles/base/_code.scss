@@ -7,6 +7,8 @@
  */
 
 code {
-    font-family: $font-family-code;
-    @include rem(line-height, $line-height-default);
+    @include themify($themes) {
+        font-family: themed('fontFamily.code');
+        line-height: themed('lineHeight.default');
+    }
 }

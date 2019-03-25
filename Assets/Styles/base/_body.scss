@@ -14,7 +14,9 @@
  *    https://code.google.com/p/chromium/issues/detail?id=320754
  */
  body {
-    color: $text-color-default;
-    font-family: $font-family-default;
-    font-size: $font-size-default-em; /* 1. */
+    @include themify($themes) {
+        color: themed('color.text.default');
+        font-family: themed('fontFamily.default');
+        font-size: themed('fontSize.defaultEM'); /* 1. */
+    }
 }

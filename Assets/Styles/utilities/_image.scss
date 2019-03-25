@@ -4,6 +4,9 @@
 
 .image--logo {
     display: block;
-    @include rem(height, $image-logo-height);
-    @include rem(max-width, $image-logo-width);
+
+    @include themify($themes) {
+        height: themed('image.logo.height');
+        width: themed('image.logo.width');
+    }
 }

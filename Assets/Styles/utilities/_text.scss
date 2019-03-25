@@ -6,13 +6,23 @@
  * Variety of classes for customising the display of text.
  */
 
-.text--light { color: $text-color-light; }
+.text--light {
+    @include themify($themes) {
+        color: themed('color.text.light');
+    }
+}
 
-.text--small { @include rem(font-size, $font-size-small); }
+.text--small {
+    @include themify($themes) {
+        font-size: themed('fontSize.small');
+    }
+}
 
 .text--meta {
     @include rem(margin-bottom, $spacing-small);
     
-    color: $text-color-light;
-    @include rem(font-size, $font-size-small);
+    @include themify($themes) {
+        color: themed('color.text.light');
+        font-size: themed('fontSize.small');
+    }
 }

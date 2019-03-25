@@ -19,12 +19,17 @@
     @include rem(max-width, $layout-content-width);
     width: 100%;
 
-    border-bottom: $border-thickness-default $border-style-default $border-color-default;
+    @include themify($themes) {
+        border-bottom: themed('border.thickness') themed('border.style') themed('border.color');
+    }
 }
 
     .header__title {
         @include rem(margin-bottom, $spacing-small);
 
-        @include rem(font-size, $font-size-secondary);
-        font-weight: bold;
+        @include themify($themes) {
+            font-size: themed('fontSize.secondary');
+            font-weight: themed('fontWeight.bold');
+        }
+        
     }

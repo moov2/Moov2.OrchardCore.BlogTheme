@@ -12,21 +12,29 @@ h3 {
     @include rem(margin-bottom, $spacing-large);
     margin-top: 0;
 
-    font-family: $font-family-default;
-    font-weight: bold;
+    @include themify($themes) {
+        font-family: themed('fontFamily.default');
+        font-weight: themed('fontWeight.bold');
+    }
 }
 
 h1 {
-    @include rem(font-size, $font-size-primary);
-    @include rem(line-height, $line-height-primary);
+    @include themify($themes) {
+        font-family: themed('fontSize.primary');
+        line-height: themed('lineHeight.primary');
+    }
 }
 
 h2 {
-    @include rem(font-size, $font-size-secondary);
-    @include rem(line-height, $line-height-secondary);
+    @include themify($themes) {
+        font-family: themed('fontSize.secondary');
+        line-height: themed('lineHeight.secondary');
+    }
 }
 
 h3 {
-    @include rem(font-size, $font-size-tertiary);
-    @include rem(line-height, $line-height-tertiary);
+    @include themify($themes) {
+        font-family: themed('fontSize.tertiary');
+        line-height: themed('lineHeight.tertiary');
+    }
 }

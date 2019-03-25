@@ -11,8 +11,10 @@
 }
 
 .icon--social {
-    height: $icon-social-dimension;
-    width: $icon-social-dimension;
+    @include themify($themes) {
+        height: themed('icon.social.dimension');
+        width: themed('icon.social.width');
 
-    fill: $icon-social-fill;
+        fill: themed('icon.social.fill');
+    }
 }
